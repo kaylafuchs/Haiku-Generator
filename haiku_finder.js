@@ -1,3 +1,6 @@
+// should take one command line argument, an array made up of arrays of 
+// integers with one array per line of haiku, e.g. [[2,2,1],[1,1,2,1,2],[2,1,1,1]]
+
 var structure = eval(process.argv[2])
 var book = require('./sorted_waste_land')
 //var doc = require('./' + process.argv[3]).bookSyllableCounts;
@@ -30,14 +33,4 @@ function findHaiku(structure,string,array){
 
 
 console.log(findHaiku(structure,stringOfSyllableCounts,wordsInBook));
-//console.log(findHaiku(structure,doc,words));
-// console.log(numOfWords);
-//haiku patterns
 
-//1,2,2
-//2,3,1,1
-//2,1,2
-
-//[1,2,2,2,3,1,1,2,1,2]
-
-//[[2,2,1],[1,1,2,1,2],[2,1,1,1]]
