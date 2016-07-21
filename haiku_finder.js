@@ -34,3 +34,4 @@ function findHaiku(structure,string,array){
 
 console.log(findHaiku(structure,stringOfSyllableCounts,wordsInBook));
 
+//console.log(stringOfSyllableCounts);

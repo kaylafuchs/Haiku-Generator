@@ -10,11 +10,17 @@ function readWasteLand(file){
 }
 
 function syllableCounter(doc){
+	var found = false;
 	doc.forEach(function(word){
 		for (var i = 0; i < dictionary.length; i++){
 			if (dictionary[i].indexOf(word.toUpperCase()) > -1){
 				bookSyllableCounts += (i + 1);
-			}
+				found = true;
+			} 
+		}
+		console.log(found);
+		if (found != true){
+			bookSyllableCounts += word;
 		}
 	})
 	return bookSyllableCounts;
@@ -28,4 +34,4 @@ module.exports = {
 	bookSyllableCounts: bookSyllableCounts
 }
 
-//console.log(bookSyllableCounts);
+console.log(bookSyllableCounts);
