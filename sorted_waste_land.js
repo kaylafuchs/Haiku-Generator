@@ -33,4 +33,4 @@ module.exports = {
 	bookSyllableCounts: bookSyllableCounts
 }
 
-console.log(bookSyllableCounts.length + " " + sortedWasteLand.length);
+console.log(bookSyllableCounts);
