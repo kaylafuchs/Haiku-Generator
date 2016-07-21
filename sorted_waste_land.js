@@ -18,9 +18,8 @@ function syllableCounter(doc){
 				found = true;
 			} 
 		}
-		console.log(found);
-		if (found != true){
-			bookSyllableCounts += word;
+		if (!found){
+			bookSyllableCounts += "0";
 		}
 	})
 	return bookSyllableCounts;
@@ -34,4 +33,4 @@ module.exports = {
 	bookSyllableCounts: bookSyllableCounts
 }
 
-console.log(bookSyllableCounts);
+console.log(bookSyllableCounts.length + " " + sortedWasteLand.length);
