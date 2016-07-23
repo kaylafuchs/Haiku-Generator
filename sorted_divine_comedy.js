@@ -1,31 +1,34 @@
 var fs = require('fs');
-var divineComedy = readDivineComedy('./divine_comedy.txt');
-var dictionary = require('./sorted_cmu_dictionary.js').wordArray;
-//var testDoc = "Words should be in dictionary fertilization."
-var sortedDivineComedy = divineComedy.replace(/\W+/g," ").split(" ");
-var bookSyllableCounts = ""
+var book = readBook('./divine_comedy.txt');
+var dictionary = require('./sorted_cmu_dictionary.js').wordObj;
+var words = book.replace(/\W+/g," ").split(" ");
+var syllableCounts = ""
 
 
-function readDivineComedy(file){
+function readBook(file){
 	return fs.readFileSync(file).toString();
 }
 
 function syllableCounter(doc){
-	doc = doc.replace(/\W+/g," ").split(" ");
-	doc.forEach(function(word,index){
-		for (var i = 0; i < dictionary.length; i++){
-			if (dictionary[i].indexOf(word.toUpperCase()) > -1){
-				bookSyllableCounts += i + 1;
-			}
+	doc.forEach(function(word){
+		var found = false;
+		for (var key in dictionary){
+			if (dictionary[key].hasOwnProperty(word.toUpperCase())){
+				syllableCounts += key;
+				found = true;
+			} 
+		}
+		if (!found){
+			syllableCounts += "0";
 		}
 	})
-	return bookSyllableCounts;
+	return syllableCounts;
 }
 
-syllableCounter(divineComedy);
+syllableCounter(words);
 
 
 module.exports = {
-	sortedDivineComedy: sortedDivineComedy,
-	bookSyllableCounts: bookSyllableCounts
+	words: words,
+	syllableCounts: syllableCounts
 }

@@ -3,14 +3,15 @@
 // eg: node haiku_generator.js [[2,3],[4,3],[1,1,2,1]] sorted_cmu_dictionary.js
 
 var structure = eval(process.argv[2])
-var doc = require('./' + process.argv[3]).wordArray;
+var doc = require('./' + process.argv[3]).wordObj;
 
 function createHaiku(structure,doc){
 	var haiku = ""
 	structure.forEach(function(line){
 		line.forEach(function(num){
-			var syllableArray = doc[num - 1];
-			haiku += " " + syllableArray[Math.floor(Math.random() * syllableArray.length)].replace(/[^a-zA-Z]/g,"");
+			num = num.toString();
+			var keys = Object.keys(doc[num]);
+			haiku += " " + keys[Math.floor(Math.random() * keys.length)].replace(/[^a-zA-Z]/g,"");
 		});
 		haiku += "\n";
 	});

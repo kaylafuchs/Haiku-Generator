@@ -1,16 +1,24 @@
 
 var fs = require('fs');
 var cmuDict = readCmudictFile('./cmudict.txt');
-var wordArray = [wordSorter(cmuDict,1),wordSorter(cmuDict,2),wordSorter(cmuDict,3),wordSorter(cmuDict,4),wordSorter(cmuDict,5),wordSorter(cmuDict,6),wordSorter(cmuDict,7)]
-
+var wordObj = wordSorter(cmuDict)
 function readCmudictFile(file){
 	return fs.readFileSync(file).toString();
 }
 
-function wordSorter(document,number){
+function wordSorter(document){
 	var lines = document.toString().split("\n"),
 		lineSplit
 	var output = []
+		var output = {
+			"1": {},
+			"2": {},
+			"3": {},
+			"4": {},
+			"5": {},
+			"6": {},
+			"7": {},
+		}
 
 	lines.forEach(function(line){
 		lineSplit = line.split(" ");
@@ -21,8 +29,9 @@ function wordSorter(document,number){
 				counter ++
 			}
 		}
-		if (counter == number){
-			output.push(lineSplit[0]);
+		if (counter > 0 && counter <= 7){
+			var key = counter.toString();
+			output[key][lineSplit[0]] = counter;		
 		}
 	});
 	return output;
@@ -30,5 +39,5 @@ function wordSorter(document,number){
 
 
 module.exports = {
-	wordArray: wordArray,
+	wordObj: wordObj
 }

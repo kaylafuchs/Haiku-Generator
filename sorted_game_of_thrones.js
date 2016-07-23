@@ -1,5 +1,5 @@
 var fs = require('fs');
-var book = readBook('./dracula.txt');
+var book = readBook('./game_of_thrones.txt');
 var dictionary = require('./sorted_cmu_dictionary.js').wordObj;
 var words = book.replace(/\W+/g," ").split(" ");
 var syllableCounts = ""

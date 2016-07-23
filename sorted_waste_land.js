@@ -1,36 +1,34 @@
 var fs = require('fs');
-var wasteLand = readWasteLand('./the_waste_land.txt');
-var dictionary = require('./sorted_cmu_dictionary.js').wordArray;
-var sortedWasteLand = wasteLand.replace(/\W+/g," ").split(" ");
-var bookSyllableCounts = ""
+var book = readBook('./the_waste_land.txt');
+var dictionary = require('./sorted_cmu_dictionary.js').wordObj;
+var words = book.replace(/\W+/g," ").split(" ");
+var syllableCounts = ""
 
 
-function readWasteLand(file){
+function readBook(file){
 	return fs.readFileSync(file).toString();
 }
 
 function syllableCounter(doc){
-	var found = false;
 	doc.forEach(function(word){
-		for (var i = 0; i < dictionary.length; i++){
-			if (dictionary[i].indexOf(word.toUpperCase()) > -1){
-				bookSyllableCounts += (i + 1);
+		var found = false;
+		for (var key in dictionary){
+			if (dictionary[key].hasOwnProperty(word.toUpperCase())){
+				syllableCounts += key;
 				found = true;
 			} 
 		}
 		if (!found){
-			bookSyllableCounts += "0";
+			syllableCounts += "0";
 		}
 	})
-	return bookSyllableCounts;
+	return syllableCounts;
 }
 
-syllableCounter(sortedWasteLand);
+syllableCounter(words);
 
 
 module.exports = {
-	sortedWasteLand: sortedWasteLand,
-	bookSyllableCounts: bookSyllableCounts
+	words: words,
+	syllableCounts: syllableCounts
 }
-
-console.log(bookSyllableCounts);
